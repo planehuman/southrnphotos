@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SouthrnPhotos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 font-sans antialiased min-h-screen flex flex-col selection:bg-amber-500 selection:text-zinc-950">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#home" onclick="switchPage('home')" class="text-2xl font-bold tracking-wider uppercase text-white flex items-center gap-2">
+                Southrn<span class="text-amber-500">Photos</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <button onclick="switchPage('home')" class="nav-link hover:text-white transition-colors text-white" data-target="home">Home</button>
+                <button onclick="switchPage('albums')" class="nav-link hover:text-white transition-colors" data-target="albums">Albums</button>
+                <button onclick="switchPage('pricing')" class="nav-link hover:text-white transition-colors" data-target="pricing">Pricing</button>
+                <button onclick="switchPage('blog')" class="nav-link hover:text-white transition-colors" data-target="blog">Blog</button>
+                <button onclick="switchPage('contact')" class="nav-link hover:text-white transition-colors" data-target="contact">Contact & Socials</button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-zinc-400 hover:text-white">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-b border-zinc-800 px-6 py-4 flex flex-col gap-4">
+            <button onclick="switchPage('home'); toggleMobileMenu();" class="text-left text-zinc-300 hover:text-white">Home</button>
+            <button onclick="switchPage('albums'); toggleMobileMenu();" class="text-left text-zinc-300 hover:text-white">Albums</button>
+            <button onclick="switchPage('pricing'); toggleMobileMenu();" class="text-left text-zinc-300 hover:text-white">Pricing</button>
+            <button onclick="switchPage('blog'); toggleMobileMenu();" class="text-left text-zinc-300 hover:text-white">Blog</button>
+            <button onclick="switchPage('contact'); toggleMobileMenu();" class="text-left text-zinc-300 hover:text-white">Contact & Socials</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow">
+
+        <!-- HOME PAGE -->
+        <section id="page-home" class="page-section">
+            <div class="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden">
+                <div class="absolute inset-0 -z-10">
+                    <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=2000" alt="Hero background" class="w-full h-full object-cover opacity-30 scale-105 animate-pulse duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent"></div>
+                </div>
+                <div class="max-w-3xl space-y-6">
+                    <span class="text-amber-500 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Professional Photography</span>
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-white">Capturing the extraordinary in every frame.</h1>
+                    <p class="text-lg text-zinc-400 max-w-xl mx-auto">Specializing in high-impact aviation, striking automotive work, authentic wildlife, and dynamic street scenes.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                        <button onclick="switchPage('albums')" class="bg-white text-zinc-950 font-semibold px-8 py-3 rounded-full hover:bg-zinc-200 transition-all shadow-lg shadow-white/10">Explore Albums</button>
+                        <button onclick="switchPage('contact')" class="border border-zinc-700 font-semibold px-8 py-3 rounded-full hover:border-zinc-500 hover:bg-zinc-900 transition-all">Get in Touch</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Highlights Grid -->
+            <div class="max-w-7xl mx-auto px-6 py-20">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <h2 class="text-3xl font-bold tracking-tight text-white">Featured Categories</h2>
+                        <p class="text-zinc-400 mt-1">Explore some of my primary areas of focus.</p>
+                    </div>
+                    <button onclick="switchPage('albums')" class="text-amber-500 font-semibold hover:text-amber-400 flex items-center gap-1 text-sm">View all albums <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="switchPage('albums'); filterAlbum('aviation')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&q=80&w=800" alt="Aviation" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-xl font-bold text-white">Aviation</h3>
+                            <p class="text-sm text-zinc-300 mt-1">High-speed skies & airshows</p>
+                        </div>
+                    </div>
+                    <div onclick="switchPage('albums'); filterAlbum('cars')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" alt="Cars" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-xl font-bold text-white">Cars</h3>
+                            <p class="text-sm text-zinc-300 mt-1">Automotive design & motion</p>
+                        </div>
+                    </div>
+                    <div onclick="switchPage('albums'); filterAlbum('nature')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800" alt="Nature" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-xl font-bold text-white">Nature & Wildlife</h3>
+                            <p class="text-sm text-zinc-300 mt-1">Untamed landscapes & fauna</p>
+                        </div>
+                    </div>
+                    <div onclick="switchPage('albums'); filterAlbum('street')" class="group relative h-96 rounded-2xl overflow-hidden cursor-pointer shadow-xl">
+                        <img src="https://images.unsplash.com/photo-1477959858617-67f30bc75b82?auto=format&fit=crop&q=80&w=800" alt="Street" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-xl font-bold text-white">Street</h3>
+                            <p class="text-sm text-zinc-300 mt-1">Urban life & candid moments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ALBUMS PAGE -->
+        <section id="page-albums" class="page-section hidden max-w-7xl mx-auto px-6 py-16">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h1 class="text-4xl font-extrabold tracking-tight text-white">Albums Gallery</h1>
+                <p class="text-zinc-400 mt-2">Filter through curated collections of captured moments. Click any image to view details.</p>
+                
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 mt-8">
+                    <button onclick="filterAlbum('all')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-amber-500 text-zinc-950 transition-all" data-filter="all">All Photos</button>
+                    <button onclick="filterAlbum('aviation')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all" data-filter="aviation">Aviation</button>
+                    <button onclick="filterAlbum('cars')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all" data-filter="cars">Cars</button>
+                    <button onclick="filterAlbum('nature')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all" data-filter="nature">Nature / Wildlife</button>
+                    <button onclick="filterAlbum('street')" class="filter-btn px-5 py-2 rounded-full text-sm font-semibold bg-zinc-900 text-zinc-400 hover:bg-zinc-800 hover:text-white transition-all" data-filter="street">Street</button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid (Dynamically Populated from photos.json) -->
+            <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Javascript injects items here -->
+            </div>
+        </section>
+
+        <!-- PRICING PAGE -->
+        <section id="page-pricing" class="page-section hidden max-w-7xl mx-auto px-6 py-16">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-amber-500 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Investment</span>
+                <h1 class="text-4xl font-extrabold tracking-tight text-white mt-3">Simple, Transparent Pricing</h1>
+                <p class="text-zinc-400 mt-2">Choose the right package for your personal or commercial photography needs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Tier 1 -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-white">Portrait / Session</h3>
+                            <span class="text-xs text-zinc-400 bg-zinc-800 px-3 py-1 rounded-full">Standard</span>
+                        </div>
+                        <p class="text-zinc-400 text-sm mt-3">Ideal for senior portraits, auto shoots, or individual portfolios.</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">$250</span>
+                            <span class="text-zinc-400 text-sm"> / session</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-zinc-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> 1 Hour On-Location Shoot</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> 15 Fully Retouched Images</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Online Gallery Access</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> 48-Hour Sneak Peeks</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchPage('contact')" class="mt-8 w-full border border-zinc-700 font-semibold py-3 rounded-full hover:bg-zinc-800 hover:border-zinc-500 transition-all text-sm">Book Session</button>
+                </div>
+
+                <!-- Tier 2 (Featured) -->
+                <div class="bg-zinc-900 border-2 border-amber-500/60 rounded-3xl p-8 flex flex-col justify-between relative shadow-2xl shadow-amber-500/10">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-500 text-zinc-950 font-bold text-xs uppercase px-4 py-1 rounded-full">Most Popular</div>
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-white">Full Event / Airshow</h3>
+                            <span class="text-xs text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full">Pro</span>
+                        </div>
+                        <p class="text-zinc-400 text-sm mt-3">Comprehensive coverage for events, airshows, or track days.</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">$600</span>
+                            <span class="text-zinc-400 text-sm"> / event</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-zinc-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Up to 4 Hours Coverage</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> 50+ High-Resolution Edits</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Commercial License Included</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Quick 3-Day Turnaround</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchPage('contact')" class="mt-8 w-full bg-amber-500 text-zinc-950 font-bold py-3 rounded-full hover:bg-amber-400 transition-all text-sm shadow-lg shadow-amber-500/20">Book Package</button>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-white">Commercial / Print</h3>
+                            <span class="text-xs text-zinc-400 bg-zinc-800 px-3 py-1 rounded-full">Custom</span>
+                        </div>
+                        <p class="text-zinc-400 text-sm mt-3">Tailored photography projects, brand campaigns, and fine art prints.</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">Custom</span>
+                            <span class="text-zinc-400 text-sm"> quote</span>
+                        </div>
+                        <ul class="space-y-3 text-sm text-zinc-300">
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Full-Day or Multi-Day Shoots</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Unlimited Edited Assets</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Dedicated Creative Direction</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-amber-500"></i> Physical Print Options</li>
+                        </ul>
+                    </div>
+                    <button onclick="switchPage('contact')" class="mt-8 w-full border border-zinc-700 font-semibold py-3 rounded-full hover:bg-zinc-800 hover:border-zinc-500 transition-all text-sm">Request Quote</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BLOG PAGE -->
+        <section id="page-blog" class="page-section hidden max-w-5xl mx-auto px-6 py-16">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-amber-500 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Journal</span>
+                <h1 class="text-4xl font-extrabold tracking-tight text-white mt-3">Behind the Lens</h1>
+                <p class="text-zinc-400 mt-2">Gear reviews, field stories, and photography tips from the road.</p>
+            </div>
+
+            <div class="space-y-12">
+                <article class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="md:col-span-2 h-64 md:h-full">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800" alt="Camera gear" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 md:p-8 space-y-4">
+                        <div class="flex items-center gap-3 text-xs text-zinc-400">
+                            <span class="text-amber-500 font-semibold">Gear & Technique</span>
+                            <span>•</span>
+                            <span>July 28, 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white hover:text-amber-500 transition-colors cursor-pointer">Mastering Propeller Blur: Shutter Speed Secrets for Aviation</h2>
+                        <p class="text-zinc-400 text-sm leading-relaxed">Shooting fast-moving aircraft isn't just about freezing action. Sometimes, you need to show motion to give life to a prop plane. Here is my go-to guide for panning speeds...</p>
+                        <button class="text-sm font-semibold text-white flex items-center gap-1 hover:text-amber-500 transition-colors">Read Article <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                </article>
+
+                <article class="bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                    <div class="md:col-span-2 h-64 md:h-full">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" alt="Nature landscape" class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:col-span-3 p-6 md:p-8 space-y-4">
+                        <div class="flex items-center gap-3 text-xs text-zinc-400">
+                            <span class="text-amber-500 font-semibold">Field Notes</span>
+                            <span>•</span>
+                            <span>July 14, 2026</span>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white hover:text-amber-500 transition-colors cursor-pointer">Chasing Mist: Early Morning Wildlife Tracking in the Backcountry</h2>
+                        <p class="text-zinc-400 text-sm leading-relaxed">Getting up at 4:00 AM pays off when you encounter untouched landscapes and waking wildlife. Sharing my experiences from the recent mountain trek...</p>
+                        <button class="text-sm font-semibold text-white flex items-center gap-1 hover:text-amber-500 transition-colors">Read Article <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONTACT & SOCIALS PAGE -->
+        <section id="page-contact" class="page-section hidden max-w-7xl mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-amber-500 font-semibold tracking-widest text-xs uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Connect</span>
+                        <h1 class="text-4xl font-extrabold tracking-tight text-white mt-3">Let's Create Together</h1>
+                        <p class="text-zinc-400 mt-2">Have a project in mind, want to book a session, or just want to chat photography? Drop a message below or reach out via social media.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 text-zinc-300">
+                            <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-amber-500">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-zinc-400">Email Me</p>
+                                <p class="font-medium text-white">contact@southrnphotos.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 text-zinc-300">
+                            <div class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-amber-500">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-zinc-400">Location</p>
+                                <p class="font-medium text-white">Based out of the Southeast / Worldwide Travel</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <h3 class="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4">Follow My Work</h3>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 hover:text-amber-500 text-zinc-300 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 hover:text-amber-500 text-zinc-300 transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 hover:text-amber-500 text-zinc-300 transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                            <a href="#" class="w-12 h-12 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-zinc-800 hover:text-amber-500 text-zinc-300 transition-all"><i data-lucide="camera" class="w-5 h-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-zinc-900 border border-zinc-800 rounded-3xl p-8">
+                    <h3 class="text-xl font-bold text-white mb-6">Send a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-2">Your Name</label>
+                            <input type="text" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-2">Email Address</label>
+                            <input type="email" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-2">Subject / Service Inquiry</label>
+                            <select class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors">
+                                <option>General Inquiry</option>
+                                <option>Aviation / Airshow Shoot</option>
+                                <option>Automotive / Car Session</option>
+                                <option>Nature / Wildlife Project</option>
+                                <option>Street Photography Project</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-2">Message</label>
+                            <textarea rows="4" required class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-500 text-zinc-950 font-bold py-3.5 rounded-xl hover:bg-amber-400 transition-all shadow-lg shadow-amber-500/10">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LIGHTBOX MODAL WITH EXIF PANEL -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-zinc-950/95 backdrop-blur-xl hidden flex items-center justify-center p-4 md:p-8">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 z-20 bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+
+        <div class="w-full max-w-7xl h-full max-h-[90vh] grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+            <!-- Image Area -->
+            <div class="lg:col-span-2 h-full flex items-center justify-center overflow-hidden">
+                <img id="lb-img" src="" alt="Expanded Photo" class="max-h-[85vh] max-w-full object-contain rounded-xl shadow-2xl">
+            </div>
+
+            <!-- EXIF & Info Panel -->
+            <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8 flex flex-col justify-between h-full max-h-[85vh] overflow-y-auto">
+                <div class="space-y-6">
+                    <div>
+                        <span id="lb-category" class="text-xs uppercase tracking-wider text-amber-500 font-semibold bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Category</span>
+                        <h2 id="lb-title" class="text-2xl font-bold text-white mt-3">Photo Title</h2>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">Description</h4>
+                        <p id="lb-desc" class="text-sm text-zinc-300 leading-relaxed">Description details will appear here.</p>
+                    </div>
+
+                    <!-- EXIF Meta Grid -->
+                    <div>
+                        <h4 class="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3">Camera & EXIF Data</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-zinc-950/60 border border-zinc-800 p-3 rounded-xl">
+                                <div class="flex items-center gap-2 text-zinc-400 text-xs mb-1"><i data-lucide="camera" class="w-3.5 h-3.5 text-amber-500"></i> Camera</div>
+                                <div id="lb-camera" class="font-medium text-sm text-white">-</div>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800 p-3 rounded-xl">
+                                <div class="flex items-center gap-2 text-zinc-400 text-xs mb-1"><i data-lucide="aperture" class="w-3.5 h-3.5 text-amber-500"></i> Lens</div>
+                                <div id="lb-lens" class="font-medium text-sm text-white">-</div>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800 p-3 rounded-xl">
+                                <div class="flex items-center gap-2 text-zinc-400 text-xs mb-1"><i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i> Shutter Speed</div>
+                                <div id="lb-shutter" class="font-medium text-sm text-white">-</div>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800 p-3 rounded-xl">
+                                <div class="flex items-center gap-2 text-zinc-400 text-xs mb-1"><i data-lucide="sliders" class="w-3.5 h-3.5 text-amber-500"></i> Aperture</div>
+                                <div id="lb-aperture" class="font-medium text-sm text-white">-</div>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800 p-3 rounded-xl col-span-2">
+                                <div class="flex items-center gap-2 text-zinc-400 text-xs mb-1"><i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i> ISO Rating</div>
+                                <div id="lb-iso" class="font-medium text-sm text-white">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-zinc-800 mt-6">
+                    <button onclick="switchPage('contact'); closeLightbox();" class="w-full bg-amber-500 text-zinc-950 font-bold py-3 rounded-xl hover:bg-amber-400 transition-all text-sm shadow-lg shadow-amber-500/10">Inquire About Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 mt-20 py-8 text-center text-xs text-zinc-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 SouthrnPhotos. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-zinc-300">Privacy Policy</a>
+                <a href="#" class="hover:text-zinc-300">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Load photos from JSON on page load and build grid
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('photos.json')
+                .then(response => response.json())
+                .then(data => {
+                    const grid = document.getElementById('gallery-grid');
+                    grid.innerHTML = '';
+
+                    data.forEach(photo => {
+                        const item = document.createElement('div');
+                        item.className = "gallery-item group relative rounded-2xl overflow-hidden bg-zinc-900 aspect-square cursor-pointer";
+                        item.setAttribute('data-category', photo.category);
+                        item.setAttribute('onclick', 'openLightbox(this)');
+                        item.setAttribute('data-img', photo.img);
+                        item.setAttribute('data-title', photo.title);
+                        item.setAttribute('data-category-name', photo.categoryName);
+                        item.setAttribute('data-desc', photo.description);
+                        item.setAttribute('data-camera', photo.camera);
+                        item.setAttribute('data-lens', photo.lens);
+                        item.setAttribute('data-shutter', photo.shutter);
+                        item.setAttribute('data-aperture', photo.aperture);
+                        item.setAttribute('data-iso', photo.iso);
+
+                        item.innerHTML = `
+                            <img src="${photo.img}" alt="${photo.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-zinc-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+                                <span class="text-xs uppercase tracking-wider text-amber-500 font-semibold">${photo.categoryName}</span>
+                                <h4 class="text-lg font-bold text-white">${photo.title}</h4>
+                            </div>
+                        `;
+                        grid.appendChild(item);
+                    });
+                    
+                    // Re-initialize Lucide icons for dynamically injected elements
+                    lucide.createIcons();
+                })
+                .catch(error => console.error('Error loading gallery data:', error));
+        });
+
+        // Page Switching Function
+        function switchPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.add('hidden'));
+
+            const target = document.getElementById(`page-${pageId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if(link.getAttribute('data-target') === pageId) {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-zinc-400');
+                } else {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-zinc-400');
+                }
+            });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Filter Albums
+        function filterAlbum(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-filter') === category) {
+                    btn.classList.remove('bg-zinc-900', 'text-zinc-400');
+                    btn.classList.add('bg-amber-500', 'text-zinc-950');
+                } else {
+                    btn.classList.remove('bg-amber-500', 'text-zinc-950');
+                    btn.classList.add('bg-zinc-900', 'text-zinc-400');
+                }
+            });
+
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if(category === 'all' || itemCat === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Lightbox Handler Functions
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            
+            document.getElementById('lb-img').src = element.getAttribute('data-img');
+            document.getElementById('lb-title').innerText = element.getAttribute('data-title');
+            document.getElementById('lb-category').innerText = element.getAttribute('data-category-name');
+            document.getElementById('lb-desc').innerText = element.getAttribute('data-desc');
+            document.getElementById('lb-camera').innerText = element.getAttribute('data-camera');
+            document.getElementById('lb-lens').innerText = element.getAttribute('data-lens');
+            document.getElementById('lb-shutter').innerText = element.getAttribute('data-shutter');
+            document.getElementById('lb-aperture').innerText = element.getAttribute('data-aperture');
+            document.getElementById('lb-iso').innerText = element.getAttribute('data-iso');
+
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form Submission Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert('Thank you! Your message has been sent successfully.');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
